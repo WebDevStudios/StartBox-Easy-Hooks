@@ -14,5 +14,4 @@ This plugin allows you to insert arbitrary content into the many hooks that the 
 
 ## Frequently Asked Questions ##
 
-
-== Changelog ==
+## Changelog ##
