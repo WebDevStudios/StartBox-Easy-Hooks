@@ -1,4 +1,5 @@
 === Startbox Easy hooks ===
+
 Contributors: WebDevStudios
 Tags: theme, customization, functions, display, hooks, filters, Startbox
 Requires at least: 3.0
