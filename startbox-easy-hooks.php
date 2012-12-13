@@ -66,9 +66,14 @@ function sb_easy_hooks_do_settings_page() {
 
 	?>
 	<div class="wrap">
-		<h3>Startbox Easy Hooks Settings</h3>
+		<?php screen_icon();?>
+		<h2><?php _e('Startbox Easy Hooks Settings', 'sb_easy_hooks'); ?></h2>
 		<form action="options.php" method="post">
+			<?php submit_button(); ?>
+
 			<?php do_settings_sections( 'sbeasyhook' ); ?>
+
+			<?php submit_button(); ?>
 		</form>
 	</div>
 <?php }
