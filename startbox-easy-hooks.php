@@ -60,7 +60,7 @@ function sb_easy_hooks_do_settings_page() {
 
 		// Register each hook as a setting for it's section
 		foreach ( $section['hooks'] as $hook ) {
-			add_settings_field( $hook, $hook, 'sb_easy_hooks_render_hook_field', 'sbeasyhook', $section_id, array( 'section_id' => $section_id, 'hook' => $hook ) );
+			add_settings_field( $hook, $hook, 'sb_easy_hooks_render_hook_field', 'sbeasyhook', $section_id, array( 'label_for' => $hook, 'section_id' => $section_id, 'hook' => $hook ) );
 		}
 	}
 
@@ -107,7 +107,7 @@ function sb_easy_hooks_render_hook_section( $section ) {
  */
 function sb_easy_hooks_render_hook_field( $args ) {
 	$options = get_option( 'sb_easy_hooks_options' );
-	echo '<textarea id="' . $args['hook'] . '" name="' . $args['hook'] . '" style="height: 150px; width: 530px; float: right;">' . $options['text_string'] . '</textarea>';
+	echo '<textarea id="' . $args['hook'] . '" name="' . $args['hook'] . '" style="height: 150px; resize: vertical; width: 530px; float: right;">' . $options['text_string'] . '</textarea>';
 }
 
 /**
