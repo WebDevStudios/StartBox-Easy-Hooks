@@ -70,7 +70,7 @@ function sb_easy_hooks_do_settings_page() {
 		<h2><?php _e('Startbox Easy Hooks Settings', 'sb_easy_hooks'); ?></h2>
 		<form action="options.php" method="post">
 			<?php submit_button(); ?>
-
+			<?php settings_fields('sb_easy_hooks_options'); ?>
 			<?php do_settings_sections( 'sbeasyhook' ); ?>
 
 			<?php submit_button(); ?>
@@ -83,8 +83,31 @@ function sb_easy_hooks_do_settings_page() {
  *
  * @since 1.0
  */
-function sb_easy_hooks_options_validate() {
-	//Validation is fun
+function sb_easy_hooks_options_validate( $input ) {
+	global $sb_easy_hooks_array;
+	//add_settings_error( $setting, $code, $message, $type );
+
+	foreach ( $sb_easy_hooks_array as $section_id => $section ) {
+		foreach ( $section['hooks'] as $hook ) {
+			$newinput[ $hook ] = trim($input[ $hook ]);
+		}
+	}
+
+
+	return $newinput;
+	/*$options = get_option( 'sb_easy_hooks_options' );
+	$options['text_string'] = trim($input['text_string']);
+	if(!preg_match('/^[a-z0-9]{32}$/i', $options['text_string'])) {
+		$options['text_string'] = '';
+	}
+
+	return $options;*/
+	/*
+	$setting (required) Slug title of the setting to which this error applies.
+	$code (required) Slug-name to identify the error. Used as part of 'id' attribute in HTML output.
+	$message (required) The formatted message text to display to the user (will be shown inside styled <div> and <p>)
+	$type (optional) The type of message it is, controls HTML class. error/updated
+	*/
 }
 
 /**
@@ -107,7 +130,7 @@ function sb_easy_hooks_render_hook_section( $section ) {
  */
 function sb_easy_hooks_render_hook_field( $args ) {
 	$options = get_option( 'sb_easy_hooks_options' );
-	echo '<textarea id="' . $args['hook'] . '" name="' . $args['hook'] . '" style="height: 150px; resize: vertical; width: 530px; float: right;">' . $options['text_string'] . '</textarea>';
+	echo "<textarea id='{$args['hook']}' name='sb_easy_hooks_options[{$args['hook']}]' style='height: 150px; resize: vertical; width: 530px; float: right;'>{$options[$args['hook']]}</textarea>";
 }
 
 /**
