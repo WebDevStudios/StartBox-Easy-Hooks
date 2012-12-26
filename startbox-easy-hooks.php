@@ -15,6 +15,7 @@ load_plugin_textdomain( 'sb_easy_hooks', FALSE, dirname( __FILE__ ) );
 add_action( 'admin_menu', 'add_sb_easy_hooks_options_page' );
 add_action( 'admin_init', 'sb_easy_hooks_options_init' );
 add_action( 'admin_init', 'sb_easy_hooks_array_init' );
+add_action( 'admin_init', 'sb_easy_hooks_notice' );
 add_action( 'init', 'sb_easy_hooks_array_init' );
 add_action( 'init', 'sb_easy_hooks_add_actions' );
 
@@ -111,11 +112,19 @@ function sb_easy_hooks_options_validate( $input ) {
 			$newinput[ $hook ] = trim( wp_kses_data( $input[ $hook ] ) );
 		}
 	}
-	add_action( 'admin_notices', 'sb_easy_hooks_notice_success' );
 
 	return $newinput;
 }
 
+/**
+ * Add our notice when appropriate
+ *
+ * @since 1.0
+ */
+function sb_easy_hooks_notice() {
+	if ( !empty( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' )
+		add_action( 'admin_notices', 'sb_easy_hooks_notice_success');
+}
 /**
  * Admin notice indicating successful saving of our settings
  *
