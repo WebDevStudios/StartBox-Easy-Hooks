@@ -4,7 +4,7 @@ Tags: theme, customization, functions, display, hooks, filters, StartBox
 Requires at least: 3.0
 Tested up to: 3.5
 Stable tag: 1.0
-License: GPLv2 or later
+License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily insert most kinds of text content or markup into the various hooks available in the StartBox Theme Framework, without editing any theme files.
