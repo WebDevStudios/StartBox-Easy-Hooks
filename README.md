@@ -1,6 +1,5 @@
 # StartBox Easy Hooks #
-
-**Contributors:** WebDevStudios
+**Contributors:** webdevstudios, williamsba1, rzen, tw2113
 **Tags:** theme, customization, functions, display, hooks, filters, StartBox
 **Requires at least:** 3.0
 **Tested up to:** 3.5
