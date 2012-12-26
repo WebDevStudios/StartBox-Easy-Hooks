@@ -2,7 +2,7 @@
 /*
 Plugin Name: Startbox Easy Hooks
 Plugin URI: http://webdevstudios.com
-Description: This plugin allows you to insert any content into the many hooks that the Startbox provides, without editing any files! Based on Thesis OpenHook & K2 Hook Up and GPLed.
+Description: Easily insert most kinds of content into the various hooks available in the Startbox theme, without editing any files. Based on Thesis OpenHook & K2 Hook Up and GPLed.
 Version: 1.0
 Author: WebDevStudios
 Author URI: http://webdevstudios.com
@@ -27,6 +27,11 @@ function add_sb_easy_hooks_options_page() {
 	add_theme_page( __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
 }
 
+/**
+ * Set up our master sword array.
+ *
+ * @since 1.0
+ */
 function sb_easy_hooks_array_init() {
 	global $sb_easy_hooks_array;
 
@@ -37,7 +42,6 @@ function sb_easy_hooks_array_init() {
 			'all_group'            => array( 'title' => __( 'All Templates', 'sb_easy_hooks' ),      'description' => __( 'Hooks related to the all templates', 'sb_easy_hooks' ),   'hooks' => array( 'sb_before_content', 'sb_after_content' ) ),
 			'loop_group'           => array( 'title' => __( 'Loop', 'sb_easy_hooks' ),               'description' => __( 'Hooks related to the post loop', 'sb_easy_hooks' ),       'hooks' => array( 'sb_before_post', 'sb_after_post', 'sb_before_first_post', 'sb_after_first_post' ) ),
 			'loop_single_group'    => array( 'title' => __( 'Loop and Single', 'sb_easy_hooks' ),    'description' => __( 'Hooks related to the single post', 'sb_easy_hooks' ),     'hooks' => array( 'sb_post_header', 'sb_before_post_content', 'sb_after_post_content', 'sb_post_footer' ) ),
-			'admin_group'          => array( 'title' => __( 'Admin.php', 'sb_easy_hooks' ),          'description' => __( 'Hooks related to the admin area', 'sb_easy_hooks' ),      'hooks' => array( 'sb_admin_left', 'sb_admin_right' ) ),
 			'404_group'            => array( 'title' => __( '404', 'sb_easy_hooks' ),                'description' => __( 'Hooks related to the 404 page', 'sb_easy_hooks' ),        'hooks' => array( 'sb_404' ) ),
 			'sidebar_group'        => array( 'title' => __( 'Sidebar.php', 'sb_easy_hooks' ),        'description' => __( 'Hooks related to the sidebar', 'sb_easy_hooks' ),         'hooks' => array( 'sb_before_primary_widgets', 'sb_between_primary_and_secondary_widgets', 'sb_after_secondary_widgets' ) ),
 			'sidebar_footer_group' => array( 'title' => __( 'Sidebar-footer.php', 'sb_easy_hooks' ), 'description' => __( 'Hooks related to the footer sidebars', 'sb_easy_hooks' ), 'hooks' => array( 'sb_before_footer_widgets', 'sb_between_footer_widgets', 'sb_after_footer_widgets' ) ),
@@ -45,8 +49,9 @@ function sb_easy_hooks_array_init() {
 			'wp_native_group'      => array( 'title' => __( 'WordPress Native', 'sb_easy_hooks' ),   'description' => __( 'Hooks related to WordPress itself', 'sb_easy_hooks' ),    'hooks' => array( 'wp_head', 'wp_footer'  ) )
 	) );
 }
+
 /**
- * Set up our master sword array, register our settings, and add our sections/fields.
+ * Register our settings and add our sections/fields.
  *
  * @since 1.0
  */
@@ -86,6 +91,7 @@ function sb_easy_hooks_do_settings_page() {
 			<?php do_settings_sections( 'sbeasyhook' ); ?>
 
 			<?php submit_button(); ?>
+
 		</form>
 	</div>
 <?php }
@@ -117,6 +123,7 @@ function sb_easy_hooks_options_validate( $input ) {
 function sb_easy_hooks_notice_success() {
 	echo '<div class="updated"><p>' . __( 'Your Easy Hooks have been successfully saved', 'sb_easy_hooks' ) . '</div>';
 }
+
 /**
  * Helper function for rendering our hook sections
  *
@@ -154,7 +161,6 @@ function sb_easy_hooks_add_actions() {
 
 	// Loop through each section of the master array
 	foreach ( $sb_easy_hooks_array as $section_id => $section ) {
-
 		// Loop through each hook in each section
 		foreach ( $section['hooks'] as $hook ) {
 			// Add our option output to the hook
@@ -162,7 +168,6 @@ function sb_easy_hooks_add_actions() {
 		}
 	}
 }
-
 
 /**
  * Helper class for sb_easy_hooks_add_actions()
@@ -176,18 +181,14 @@ if ( ! class_exists( 'SB_Easy_Hooks_Output' ) ) {
 			// Setup our passed $hook
 			$this->hook = $hook;
 		}
-
 		// Grab and echo the output or our hook
 		function hook_output() {
 			// Grab our plugin settings
 			$easy_hooks_options = get_option( 'sb_easy_hooks_options' );
-
-			// TODO: this needs to be fixed to grab the actual value based on our hook
 			$hook_value = $easy_hooks_options[$this->hook];
 
 			// Echo our output
 			echo $hook_value;
-
 		}
 	}
 } // END: If class_exists
