@@ -30,6 +30,7 @@ function add_sb_easy_hooks_options_page() {
  * @since 1.0
  */
 function sb_easy_hooks_options_init() {
+	// Setup our master hooks array, and make it filterable for other devs
 	$sb_easy_hooks_array = apply_filters( 'sb_easy_hooks_array', array(
 		'header_group'         => array( 'title' => __( 'Header.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the header', 'sb_easy_hooks' ),          'hooks' => array( 'sb_before', 'sb_before_header', 'sb_header', 'sb_after_header' ) ),
 		'frontpage_group'      => array( 'title' => __( 'Front-page.php', 'sb_easy_hooks' ),     'description' => __( 'Hooks related to the front page', 'sb_easy_hooks' ),      'hooks' => array( 'sb_before_featured', 'sb_featured', 'sb_after_featured', 'sb_home' ) ),
@@ -66,8 +67,6 @@ function sb_easy_hooks_options_init() {
  * @since 1.0
  */
 function sb_easy_hooks_do_settings_page() {
-
-  // Setup our master hooks array, and make it filterable for other devs
 	global $sb_easy_hooks_array; ?>
 
 	<div class="wrap">
@@ -87,10 +86,10 @@ function sb_easy_hooks_do_settings_page() {
  * Validation for each of our hook fields
  *
  * @since 1.0
+ * @param string $input The value of the input field that we need to validate
  */
 function sb_easy_hooks_options_validate( $input ) {
 	global $sb_easy_hooks_array;
-	//add_settings_error( $setting, $code, $message, $type );
 
 	foreach ( $sb_easy_hooks_array as $section_id => $section ) {
 		foreach ( $section['hooks'] as $hook ) {
@@ -98,6 +97,7 @@ function sb_easy_hooks_options_validate( $input ) {
 		}
 	}
 
+	add_action( 'admin_notices', 'sb_easy_hooks_notice_success' );
 
 	return $input;
 	/*$options = get_option( 'sb_easy_hooks_options' );
@@ -116,10 +116,18 @@ function sb_easy_hooks_options_validate( $input ) {
 }
 
 /**
+ * Admin notice indicating successful saving of our settings
+ *
+ * @since 1.0
+ */
+function sb_easy_hooks_notice_success() {
+	echo '<div class="success"><p>' . __('Your Easy Hooks have been successfully saved', 'sb_easy_hooks') . '</div>';
+}
+/**
  * Helper function for rendering our hook sections
  *
  * @since  1.0
- * @param  string $section_id The given section we want to render
+ * @param  array $section The given section we want to render
  */
 function sb_easy_hooks_render_hook_section( $section ) {
 	global $sb_easy_hooks_array;
@@ -130,8 +138,7 @@ function sb_easy_hooks_render_hook_section( $section ) {
  * Helper function for rendering our input fields
  *
  * @since  1.0
- * @param  string $group The section ID for our hook
- * @param  string $hook  The name of our hook
+ * @param  array $args The arguments being passed in for the field
  */
 function sb_easy_hooks_render_hook_field( $args ) {
 	$options = get_option( 'sb_easy_hooks_options' );
@@ -141,6 +148,12 @@ function sb_easy_hooks_render_hook_field( $args ) {
 	<textarea id="<?php $args['hook']; ?>" name="sb_easy_hooks_options[<?php echo $args['hook']; ?>]" style="height: 150px; resize: vertical; width: 530px; float: right;"><?php echo $sb_hook_value; ?></textarea>
 <?php
 }
+
+
+
+
+
+
 
 /**
  * Add our option values to each registered hook
