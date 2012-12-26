@@ -13,7 +13,7 @@ load_plugin_textdomain( 'sb_easy_hooks', FALSE, dirname( __FILE__ ) );
 
 // Fire up ze engines!
 add_action( 'admin_menu', 'add_sb_easy_hooks_options_page' );
-add_action( 'admin_init', 'sb_easy_hooks_options_init');
+add_action( 'admin_init', 'sb_easy_hooks_options_init' );
 
 /**
  * Add the options page to the Appearance submenu.
@@ -21,7 +21,7 @@ add_action( 'admin_init', 'sb_easy_hooks_options_init');
  * @since 1.0
  */
 function add_sb_easy_hooks_options_page() {
-  add_theme_page( __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
+	add_theme_page( __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
 }
 
 /**
@@ -30,20 +30,21 @@ function add_sb_easy_hooks_options_page() {
  * @since 1.0
  */
 function sb_easy_hooks_options_init() {
+	global $sb_easy_hooks_array;
 	// Setup our master hooks array, and make it filterable for other devs
 	$sb_easy_hooks_array = apply_filters( 'sb_easy_hooks_array', array(
-		'header_group'         => array( 'title' => __( 'Header.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the header', 'sb_easy_hooks' ),          'hooks' => array( 'sb_before', 'sb_before_header', 'sb_header', 'sb_after_header' ) ),
-		'frontpage_group'      => array( 'title' => __( 'Front-page.php', 'sb_easy_hooks' ),     'description' => __( 'Hooks related to the front page', 'sb_easy_hooks' ),      'hooks' => array( 'sb_before_featured', 'sb_featured', 'sb_after_featured', 'sb_home' ) ),
-		'all_group'            => array( 'title' => __( 'All Templates', 'sb_easy_hooks' ),      'description' => __( 'Hooks related to the all templates', 'sb_easy_hooks' ),   'hooks' => array( 'sb_before_content', 'sb_after_content' ) ),
-		'loop_group'           => array( 'title' => __( 'Loop', 'sb_easy_hooks' ),               'description' => __( 'Hooks related to the post loop', 'sb_easy_hooks' ),       'hooks' => array( 'sb_before_post', 'sb_after_post', 'sb_before_first_post', 'sb_after_first_post' ) ),
-		'loop_single_group'    => array( 'title' => __( 'Loop and Single', 'sb_easy_hooks' ),    'description' => __( 'Hooks related to the single post', 'sb_easy_hooks' ),     'hooks' => array( 'sb_post_header', 'sb_before_post_content', 'sb_after_post_content', 'sb_post_footer' ) ),
-		'admin_group'          => array( 'title' => __( 'Admin.php', 'sb_easy_hooks' ),          'description' => __( 'Hooks related to the admin area', 'sb_easy_hooks' ),      'hooks' => array( 'sb_admin_left', 'sb_admin_right' ) ),
-		'404_group'            => array( 'title' => __( '404', 'sb_easy_hooks' ),                'description' => __( 'Hooks related to the 404 page', 'sb_easy_hooks' ),        'hooks' => array( 'sb_404' ) ),
-		'sidebar_group'        => array( 'title' => __( 'Sidebar.php', 'sb_easy_hooks' ),        'description' => __( 'Hooks related to the sidebar', 'sb_easy_hooks' ),         'hooks' => array( 'sb_before_primary_widgets', 'sb_between_primary_and_secondary_widgets', 'sb_after_secondary_widgets' ) ),
-		'sidebar_footer_group' => array( 'title' => __( 'Sidebar-footer.php', 'sb_easy_hooks' ), 'description' => __( 'Hooks related to the footer sidebars', 'sb_easy_hooks' ), 'hooks' => array( 'sb_before_footer_widgets', 'sb_between_footer_widgets', 'sb_after_footer_widgets' ) ),
-		'footer_group'         => array( 'title' => __( 'Footer.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the footer', 'sb_easy_hooks' ),          'hooks' => array( 'sb_between_content_and_footer', 'sb_before_footer', 'sb_footer', 'sb_after_footer', 'sb_after' ) ),
-		'wp_native_group'      => array( 'title' => __( 'WordPress Native', 'sb_easy_hooks' ),   'description' => __( 'Hooks related to WordPress itself', 'sb_easy_hooks' ),    'hooks' => array( 'wp_head', 'wp_footer'  ) )
-	) );
+			'header_group'         => array( 'title' => __( 'Header.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the header', 'sb_easy_hooks' ),          'hooks' => array( 'sb_before', 'sb_before_header', 'sb_header', 'sb_after_header' ) ),
+			'frontpage_group'      => array( 'title' => __( 'Front-page.php', 'sb_easy_hooks' ),     'description' => __( 'Hooks related to the front page', 'sb_easy_hooks' ),      'hooks' => array( 'sb_before_featured', 'sb_featured', 'sb_after_featured', 'sb_home' ) ),
+			'all_group'            => array( 'title' => __( 'All Templates', 'sb_easy_hooks' ),      'description' => __( 'Hooks related to the all templates', 'sb_easy_hooks' ),   'hooks' => array( 'sb_before_content', 'sb_after_content' ) ),
+			'loop_group'           => array( 'title' => __( 'Loop', 'sb_easy_hooks' ),               'description' => __( 'Hooks related to the post loop', 'sb_easy_hooks' ),       'hooks' => array( 'sb_before_post', 'sb_after_post', 'sb_before_first_post', 'sb_after_first_post' ) ),
+			'loop_single_group'    => array( 'title' => __( 'Loop and Single', 'sb_easy_hooks' ),    'description' => __( 'Hooks related to the single post', 'sb_easy_hooks' ),     'hooks' => array( 'sb_post_header', 'sb_before_post_content', 'sb_after_post_content', 'sb_post_footer' ) ),
+			'admin_group'          => array( 'title' => __( 'Admin.php', 'sb_easy_hooks' ),          'description' => __( 'Hooks related to the admin area', 'sb_easy_hooks' ),      'hooks' => array( 'sb_admin_left', 'sb_admin_right' ) ),
+			'404_group'            => array( 'title' => __( '404', 'sb_easy_hooks' ),                'description' => __( 'Hooks related to the 404 page', 'sb_easy_hooks' ),        'hooks' => array( 'sb_404' ) ),
+			'sidebar_group'        => array( 'title' => __( 'Sidebar.php', 'sb_easy_hooks' ),        'description' => __( 'Hooks related to the sidebar', 'sb_easy_hooks' ),         'hooks' => array( 'sb_before_primary_widgets', 'sb_between_primary_and_secondary_widgets', 'sb_after_secondary_widgets' ) ),
+			'sidebar_footer_group' => array( 'title' => __( 'Sidebar-footer.php', 'sb_easy_hooks' ), 'description' => __( 'Hooks related to the footer sidebars', 'sb_easy_hooks' ), 'hooks' => array( 'sb_before_footer_widgets', 'sb_between_footer_widgets', 'sb_after_footer_widgets' ) ),
+			'footer_group'         => array( 'title' => __( 'Footer.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the footer', 'sb_easy_hooks' ),          'hooks' => array( 'sb_between_content_and_footer', 'sb_before_footer', 'sb_footer', 'sb_after_footer', 'sb_after' ) ),
+			'wp_native_group'      => array( 'title' => __( 'WordPress Native', 'sb_easy_hooks' ),   'description' => __( 'Hooks related to WordPress itself', 'sb_easy_hooks' ),    'hooks' => array( 'wp_head', 'wp_footer'  ) )
+		) );
 
 	// Register our settings options
 	register_setting( 'sb_easy_hooks_options', 'sb_easy_hooks_options', 'sb_easy_hooks_options_validate' );
@@ -71,10 +72,10 @@ function sb_easy_hooks_do_settings_page() {
 
 	<div class="wrap">
 		<?php screen_icon();?>
-		<h2><?php _e('Startbox Easy Hooks Settings', 'sb_easy_hooks'); ?></h2>
+		<h2><?php _e( 'Startbox Easy Hooks Settings', 'sb_easy_hooks' ); ?></h2>
 		<form action="options.php" method="post">
 			<?php submit_button(); ?>
-			<?php settings_fields('sb_easy_hooks_options'); ?>
+			<?php settings_fields( 'sb_easy_hooks_options' ); ?>
 			<?php do_settings_sections( 'sbeasyhook' ); ?>
 
 			<?php submit_button(); ?>
@@ -86,33 +87,19 @@ function sb_easy_hooks_do_settings_page() {
  * Validation for each of our hook fields
  *
  * @since 1.0
- * @param string $input The value of the input field that we need to validate
+ * @param string  $input The value of the input field that we need to validate
  */
 function sb_easy_hooks_options_validate( $input ) {
 	global $sb_easy_hooks_array;
 
 	foreach ( $sb_easy_hooks_array as $section_id => $section ) {
 		foreach ( $section['hooks'] as $hook ) {
-			$newinput[ $hook ] = trim($input[ $hook ]);
+			$newinput[ $hook ] = trim( wp_kses_data( $input[ $hook ] ) );
 		}
 	}
-
 	add_action( 'admin_notices', 'sb_easy_hooks_notice_success' );
 
-	return $input;
-	/*$options = get_option( 'sb_easy_hooks_options' );
-	$options['text_string'] = trim($input['text_string']);
-	if(!preg_match('/^[a-z0-9]{32}$/i', $options['text_string'])) {
-		$options['text_string'] = '';
-	}
-
-	return $options;*/
-	/*
-	$setting (required) Slug title of the setting to which this error applies.
-	$code (required) Slug-name to identify the error. Used as part of 'id' attribute in HTML output.
-	$message (required) The formatted message text to display to the user (will be shown inside styled <div> and <p>)
-	$type (optional) The type of message it is, controls HTML class. error/updated
-	*/
+	return $newinput;
 }
 
 /**
@@ -121,13 +108,13 @@ function sb_easy_hooks_options_validate( $input ) {
  * @since 1.0
  */
 function sb_easy_hooks_notice_success() {
-	echo '<div class="success"><p>' . __('Your Easy Hooks have been successfully saved', 'sb_easy_hooks') . '</div>';
+	echo '<div class="updated"><p>' . __( 'Your Easy Hooks have been successfully saved', 'sb_easy_hooks' ) . '</div>';
 }
 /**
  * Helper function for rendering our hook sections
  *
  * @since  1.0
- * @param  array $section The given section we want to render
+ * @param array   $section The given section we want to render
  */
 function sb_easy_hooks_render_hook_section( $section ) {
 	global $sb_easy_hooks_array;
@@ -138,22 +125,16 @@ function sb_easy_hooks_render_hook_section( $section ) {
  * Helper function for rendering our input fields
  *
  * @since  1.0
- * @param  array $args The arguments being passed in for the field
+ * @param array   $args The arguments being passed in for the field
  */
 function sb_easy_hooks_render_hook_field( $args ) {
-	$options = get_option( 'sb_easy_hooks_options' );
+	$easy_hooks_options = get_option( 'sb_easy_hooks_options' );
 
-	$sb_hook_value = isset( $options[ $args['hook'] ] ) ? $options[ $args['hook'] ] : '';
-	?>
+	$sb_hook_value = isset( $easy_hooks_options[ $args['hook'] ] ) ? $easy_hooks_options[ $args['hook'] ] : '';
+?>
 	<textarea id="<?php $args['hook']; ?>" name="sb_easy_hooks_options[<?php echo $args['hook']; ?>]" style="height: 150px; resize: vertical; width: 530px; float: right;"><?php echo $sb_hook_value; ?></textarea>
 <?php
 }
-
-
-
-
-
-
 
 /**
  * Add our option values to each registered hook
@@ -161,7 +142,6 @@ function sb_easy_hooks_render_hook_field( $args ) {
  * @since 1.0
  */
 function sb_easy_hooks_add_actions() {
-
 	// Grab our easy hooks array
 	global $sb_easy_hooks_array;
 
@@ -171,26 +151,36 @@ function sb_easy_hooks_add_actions() {
 		// Loop through each hook in each section
 		foreach ( $section['hooks'] as $hook ) {
 			// Add our option output to the hook
-			// TODO: This doesn't work because we're not passing the $hook name through to the sb_easy_hooks_option_output callback
-			add_action( $hook, 'sb_easy_hooks_option_output' );
+			add_action( $hook, array( new SB_Easy_Hooks_Output( $hook ), 'hook_output' ), $priority, 1 );
 		}
 	}
 }
 
+
 /**
- * Helper function for handling hook output
+ * Helper class for sb_easy_hooks_add_actions()
  *
- * @since  1.0
- * @param  string $hook The name of the hook whose output we want to generate
+ * @param string $hook The hook whose output we want to grab
  */
-function sb_easy_hooks_option_output( $hook ) {
+if ( ! class_exists( 'SB_Easy_Hooks_Output' ) ) {
+	class SB_Easy_Hooks_Output {
+		// Initialize our class
+		function __construct( $hook = null ) {
+			// Setup our passed $hook
+			$this->hook = $hook;
+		}
 
-	// Grab our settings
-	$easy_hooks_options = get_option( 'sb_easy_hooks_options' );
+		// Grab and echo the output or our hook
+		function hook_output() {
+			// Grab our plugin settings
+			$easy_hooks_options = get_option( 'sb_easy_hooks_options' );
 
-	// TODO: this needs to be fixed to grab the actual value based on our hook
-	$hook_value = $easy_hooks_options[$hook];
+			// TODO: this needs to be fixed to grab the actual value based on our hook
+			$hook_value = $easy_hooks_options[$this->hook];
 
-	// Echo our output
-	echo $hook_value;
-}
+			// Echo our output
+			echo $hook_value;
+
+		}
+	}
+} // END: If class_exists
