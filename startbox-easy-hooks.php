@@ -86,7 +86,7 @@ function sb_easy_hooks_do_settings_page() {
 	<div class="wrap">
 		<?php screen_icon();?>
 		<h2><?php _e( 'StartBox Easy Hooks Settings', 'sb_easy_hooks' ); ?></h2>
-		<p>You can use StartBox Easy Hooks to easily add content and basic html markup to various parts of your StartBox based project. Along the left, you'll see listed file names and below it, the StartBox hooks that are present in the file. On the right, you can add your markup or content and it will be displayed at the appropriate spot when a visitor stops by. When you are all done, hit save and go see your handywork.</p>
+		<p><?php _e('You can use StartBox Easy Hooks to easily add content and basic html markup to various parts of your StartBox based project. Along the left, you will see available file names and below those, the StartBox hooks that are present in the file. On the right, you can add your markup or content and it will be displayed at the appropriate spot when a visitor stops by. When you are all done, hit save and go see your handywork.', 'sb_easy_hooks'); ?></p>
 
 		<form action="options.php" method="post">
 			<?php submit_button(); ?>
@@ -98,7 +98,7 @@ function sb_easy_hooks_do_settings_page() {
 
 		</form>
 
-		<p>You can find more information on StartBox at the following locations: <a href="http://wpstartbox.com/" title="WordPress StartBox Theme Framework">WP StartBox Homepage</a>, <a href="https://github.com/WebDevStudios/StartBox" title="WordPress StartBox Theme Framework on GitHub">GitHub</a> and <a href="http://www.twitter.com/wpstartbox" title="WordPress StartBox on Twitter">Twitter</a>.</p>
+		<p><?php _e('You can find more information on StartBox at the following locations: <a href="http://wpstartbox.com/" title="WordPress StartBox Theme Framework">WP StartBox Homepage</a>, <a href="https://github.com/WebDevStudios/StartBox" title="WordPress StartBox Theme Framework on GitHub">GitHub</a> and <a href="http://www.twitter.com/wpstartbox" title="WordPress StartBox on Twitter">Twitter</a>.', 'sb_easy_hooks'); ?></p>
 	</div>
 <?php }
 
