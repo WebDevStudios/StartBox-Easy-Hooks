@@ -6,7 +6,7 @@ Description: Easily insert most kinds of content into the various hooks availabl
 Version: 1.0
 Author: WebDevStudios.com
 Author URI: http://webdevstudios.com
-License: GPLv2 or later.
+License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
