@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Startbox Easy Hooks
+Plugin Name: StartBox Easy Hooks
 Plugin URI: http://webdevstudios.com
-Description: Easily insert most kinds of content into the various hooks available in the Startbox theme, without editing any files. Based on Thesis OpenHook & K2 Hook Up and GPLed.
+Description: Easily insert most kinds of content into the various hooks available in the StartBox theme, without editing any files. Based on Thesis OpenHook & K2 Hook Up and GPLed.
 Version: 1.0
 Author: WebDevStudios
 Author URI: http://webdevstudios.com
@@ -24,7 +24,7 @@ add_action( 'init', 'sb_easy_hooks_add_actions' );
  * @since 1.0
  */
 function add_sb_easy_hooks_options_page() {
-	add_theme_page( __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
+	add_theme_page( __( 'StartBox Easy Hooks', 'sb_easy_hooks' ), __( 'StartBox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
 }
 
 /**
@@ -84,7 +84,7 @@ function sb_easy_hooks_do_settings_page() {
 
 	<div class="wrap">
 		<?php screen_icon();?>
-		<h2><?php _e( 'Startbox Easy Hooks Settings', 'sb_easy_hooks' ); ?></h2>
+		<h2><?php _e( 'StartBox Easy Hooks Settings', 'sb_easy_hooks' ); ?></h2>
 		<form action="options.php" method="post">
 			<?php submit_button(); ?>
 			<?php settings_fields( 'sb_easy_hooks_options' ); ?>
