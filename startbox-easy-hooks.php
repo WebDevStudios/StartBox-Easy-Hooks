@@ -14,6 +14,9 @@ load_plugin_textdomain( 'sb_easy_hooks', FALSE, dirname( __FILE__ ) );
 // Fire up ze engines!
 add_action( 'admin_menu', 'add_sb_easy_hooks_options_page' );
 add_action( 'admin_init', 'sb_easy_hooks_options_init' );
+add_action( 'admin_init', 'sb_easy_hooks_array_init' );
+add_action( 'init', 'sb_easy_hooks_array_init' );
+add_action( 'init', 'sb_easy_hooks_add_actions' );
 
 /**
  * Add the options page to the Appearance submenu.
@@ -24,13 +27,9 @@ function add_sb_easy_hooks_options_page() {
 	add_theme_page( __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), __( 'Startbox Easy Hooks', 'sb_easy_hooks' ), 'manage_options', 'sbeasyhook', 'sb_easy_hooks_do_settings_page' );
 }
 
-/**
- * Set up our master sword array, register our settings, and add our sections/fields.
- *
- * @since 1.0
- */
-function sb_easy_hooks_options_init() {
+function sb_easy_hooks_array_init() {
 	global $sb_easy_hooks_array;
+
 	// Setup our master hooks array, and make it filterable for other devs
 	$sb_easy_hooks_array = apply_filters( 'sb_easy_hooks_array', array(
 			'header_group'         => array( 'title' => __( 'Header.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the header', 'sb_easy_hooks' ),          'hooks' => array( 'sb_before', 'sb_before_header', 'sb_header', 'sb_after_header' ) ),
@@ -44,7 +43,15 @@ function sb_easy_hooks_options_init() {
 			'sidebar_footer_group' => array( 'title' => __( 'Sidebar-footer.php', 'sb_easy_hooks' ), 'description' => __( 'Hooks related to the footer sidebars', 'sb_easy_hooks' ), 'hooks' => array( 'sb_before_footer_widgets', 'sb_between_footer_widgets', 'sb_after_footer_widgets' ) ),
 			'footer_group'         => array( 'title' => __( 'Footer.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the footer', 'sb_easy_hooks' ),          'hooks' => array( 'sb_between_content_and_footer', 'sb_before_footer', 'sb_footer', 'sb_after_footer', 'sb_after' ) ),
 			'wp_native_group'      => array( 'title' => __( 'WordPress Native', 'sb_easy_hooks' ),   'description' => __( 'Hooks related to WordPress itself', 'sb_easy_hooks' ),    'hooks' => array( 'wp_head', 'wp_footer'  ) )
-		) );
+	) );
+}
+/**
+ * Set up our master sword array, register our settings, and add our sections/fields.
+ *
+ * @since 1.0
+ */
+function sb_easy_hooks_options_init() {
+	global $sb_easy_hooks_array;
 
 	// Register our settings options
 	register_setting( 'sb_easy_hooks_options', 'sb_easy_hooks_options', 'sb_easy_hooks_options_validate' );
@@ -151,7 +158,7 @@ function sb_easy_hooks_add_actions() {
 		// Loop through each hook in each section
 		foreach ( $section['hooks'] as $hook ) {
 			// Add our option output to the hook
-			add_action( $hook, array( new SB_Easy_Hooks_Output( $hook ), 'hook_output' ), $priority, 1 );
+			add_action( $hook, array( new SB_Easy_Hooks_Output( $hook ), 'hook_output' ), 10, 1 );
 		}
 	}
 }
