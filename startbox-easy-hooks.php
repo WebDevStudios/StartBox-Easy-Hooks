@@ -162,7 +162,7 @@ function sb_easy_hooks_render_hook_field( $args ) {
 
 	$sb_hook_value = isset( $easy_hooks_options[ $args['hook'] ] ) ? $easy_hooks_options[ $args['hook'] ] : '';
 ?>
-	<textarea id="<?php $args['hook']; ?>" name="sb_easy_hooks_options[<?php echo $args['hook']; ?>]" style="height: 150px; resize: vertical; width: 530px; float: right;"><?php echo $sb_hook_value; ?></textarea>
+	<textarea id="<?php $args['hook']; ?>" name="sb_easy_hooks_options[<?php echo $args['hook']; ?>]" style="height: 150px; resize: vertical; width: 530px; float: right;"><?php echo htmlentities( $sb_hook_value, ENT_QUOTES, 'UTF-8' ); ?></textarea>
 <?php
 }
 
