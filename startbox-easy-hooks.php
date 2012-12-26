@@ -115,7 +115,7 @@ function sb_easy_hooks_options_validate( $input ) {
 
 	foreach ( $sb_easy_hooks_array as $section_id => $section ) {
 		foreach ( $section['hooks'] as $hook ) {
-			$newinput[ $hook ] = trim( wp_kses_data( $input[ $hook ] ) );
+			$newinput[ $hook ] = wp_kses_stripslashes( wp_kses_decode_entities( $input[ $hook ] ) );
 		}
 	}
 
