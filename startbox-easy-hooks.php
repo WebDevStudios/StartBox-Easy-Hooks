@@ -8,14 +8,12 @@ Author: WebDevStudios
 Author URI: http://webdevstudios.com
 */
 
-/*
-	TODO: Save button, top and bottom.
-*/
-// Localization.
+// Localization. Should be bablefish ready.
 load_plugin_textdomain( 'sb_easy_hooks', FALSE, dirname( __FILE__ ) );
 
-// Fire up the engine!
+// Fire up ze engines!
 add_action( 'admin_menu', 'add_sb_easy_hooks_options_page' );
+add_action( 'admin_init', 'sb_easy_hooks_options_init');
 
 /**
  * Add the options page to the Appearance submenu.
@@ -27,14 +25,11 @@ function add_sb_easy_hooks_options_page() {
 }
 
 /**
- * Lets get our page rendered.
+ * Set up our master sword array, register our settings, and add our sections/fields.
  *
  * @since 1.0
  */
-function sb_easy_hooks_do_settings_page() {
-
-  // Setup our master hooks array, and make it filterable for other devs
-	global $sb_easy_hooks_array;
+function sb_easy_hooks_options_init() {
 	$sb_easy_hooks_array = apply_filters( 'sb_easy_hooks_array', array(
 		'header_group'         => array( 'title' => __( 'Header.php', 'sb_easy_hooks' ),         'description' => __( 'Hooks related to the header', 'sb_easy_hooks' ),          'hooks' => array( 'sb_before', 'sb_before_header', 'sb_header', 'sb_after_header' ) ),
 		'frontpage_group'      => array( 'title' => __( 'Front-page.php', 'sb_easy_hooks' ),     'description' => __( 'Hooks related to the front page', 'sb_easy_hooks' ),      'hooks' => array( 'sb_before_featured', 'sb_featured', 'sb_after_featured', 'sb_home' ) ),
@@ -63,8 +58,18 @@ function sb_easy_hooks_do_settings_page() {
 			add_settings_field( $hook, $hook, 'sb_easy_hooks_render_hook_field', 'sbeasyhook', $section_id, array( 'label_for' => $hook, 'section_id' => $section_id, 'hook' => $hook ) );
 		}
 	}
+}
 
-	?>
+/**
+ * Lets get our page rendered.
+ *
+ * @since 1.0
+ */
+function sb_easy_hooks_do_settings_page() {
+
+  // Setup our master hooks array, and make it filterable for other devs
+	global $sb_easy_hooks_array; ?>
+
 	<div class="wrap">
 		<?php screen_icon();?>
 		<h2><?php _e('Startbox Easy Hooks Settings', 'sb_easy_hooks'); ?></h2>
@@ -94,7 +99,7 @@ function sb_easy_hooks_options_validate( $input ) {
 	}
 
 
-	return $newinput;
+	return $input;
 	/*$options = get_option( 'sb_easy_hooks_options' );
 	$options['text_string'] = trim($input['text_string']);
 	if(!preg_match('/^[a-z0-9]{32}$/i', $options['text_string'])) {
@@ -130,7 +135,11 @@ function sb_easy_hooks_render_hook_section( $section ) {
  */
 function sb_easy_hooks_render_hook_field( $args ) {
 	$options = get_option( 'sb_easy_hooks_options' );
-	echo "<textarea id='{$args['hook']}' name='sb_easy_hooks_options[{$args['hook']}]' style='height: 150px; resize: vertical; width: 530px; float: right;'>{$options[$args['hook']]}</textarea>";
+
+	$sb_hook_value = isset( $options[ $args['hook'] ] ) ? $options[ $args['hook'] ] : '';
+	?>
+	<textarea id="<?php $args['hook']; ?>" name="sb_easy_hooks_options[<?php echo $args['hook']; ?>]" style="height: 150px; resize: vertical; width: 530px; float: right;"><?php echo $sb_hook_value; ?></textarea>
+<?php
 }
 
 /**
