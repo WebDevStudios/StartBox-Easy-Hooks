@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: StartBox Easy Hooks
-Plugin URI: http://webdevstudios.com
+Plugin URI: http://wpstartbox.com/
 Description: Easily insert most kinds of content into the various hooks available in the StartBox theme, without editing any files. Based on Thesis OpenHook & K2 Hook Up and GPLed.
 Version: 1.0
-Author: WebDevStudios
+Author: webdevstudios, williamsba1, rzen, tw2113
 Author URI: http://webdevstudios.com
 */
 
@@ -135,7 +135,7 @@ function sb_easy_hooks_notice() {
  * @since 1.0
  */
 function sb_easy_hooks_notice_success() {
-	echo '<div class="updated"><p>' . __( 'Your Easy Hooks have been successfully saved', 'sb_easy_hooks' ) . '</div>';
+	echo '<div class="updated"><p>' . __( 'Your hook settings have been successfully saved.', 'sb_easy_hooks' ) . '</div>';
 }
 
 /**
