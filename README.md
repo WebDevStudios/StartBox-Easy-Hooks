@@ -1,4 +1,4 @@
-# StartBox Easy hooks #
+# StartBox Easy Hooks #
 
 **Contributors:** WebDevStudios
 **Tags:** theme, customization, functions, display, hooks, filters, StartBox
