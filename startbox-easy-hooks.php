@@ -92,6 +92,7 @@ function sb_easy_hooks_do_settings_page() {
 
 			<?php submit_button(); ?>
 
+			<p>You can find more information on StartBox at the following locations: <a href="http://wpstartbox.com/" title="WordPress StartBox Theme Framework">WP StartBox Homepage</a>, <a href="https://github.com/WebDevStudios/StartBox" title="WordPress StartBox Theme Framework on GitHub">Github</a> and <a href="http://www.twitter.com/wpstartbox" title="WordPress StartBox on Twitter">@wpstartbox on Twitter</a>.</p>
 		</form>
 	</div>
 <?php }
