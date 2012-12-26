@@ -14,6 +14,8 @@ Easily insert most kinds of text content or markup into the various hooks availa
 
 Easily insert most kinds of content or markup into the various hooks available in the StartBox Theme Framework, without editing any theme files. This allows you to further customize your StartBox based project without having to deal with code and manually adding WordPress hooks.
 
+For more information on the StartBox hooks, visit [StartBox Hooks](http://docs.wpstartbox.com/Hooks)
+
 ## Installation ##
 
 Automatic
