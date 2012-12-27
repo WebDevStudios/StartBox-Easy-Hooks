@@ -128,7 +128,8 @@ function sb_easy_hooks_options_validate( $input ) {
  * @since 1.0
  */
 function sb_easy_hooks_notice() {
-	if ( !empty( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' )
+	if ( !empty( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true'
+			&& isset( $_GET['page'] ) && $_GET['page'] == 'sbeasyhook' )
 		add_action( 'admin_notices', 'sb_easy_hooks_notice_success');
 }
 /**
