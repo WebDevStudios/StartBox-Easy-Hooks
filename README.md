@@ -33,30 +33,29 @@ Manual
 
 To add an entire group to the Easy Hooks page, add a filter like so.
 
-`<?php
-add_filter( 'sb_easy_hooks_array', 'prefix_add_custom_hooks_group' );
-function prefix_add_custom_hooks_group( $hooks ) {
-	$hooks['group_name'] = array(
-		'title' => __( 'File Location.php', 'sb_easy_hooks' ),
-		'description' => __( 'Description goes here', 'sb_easy_hooks' ),
-		'hooks' => array( 'hook_one', 'hook_two' )
-	);
-	return $hooks
-}
-?>
-`
+	<?php
+	add_filter( 'sb_easy_hooks_array', 'prefix_add_custom_hooks_group' );
+	function prefix_add_custom_hooks_group( $hooks ) {
+		$hooks['group_name'] = array(
+			'title' => __( 'File Location.php', 'sb_easy_hooks' ),
+			'description' => __( 'Description goes here', 'sb_easy_hooks' ),
+			'hooks' => array( 'hook_one', 'hook_two' )
+		);
+		return $hooks
+	}
+	?>
+
 This will create an entire new grouping in the options page and fill in all appropriate spots.
 
 If you want to add a single hook to an already existing grouping, filter this way. You will need to get the correct array key before you begin. You can do this either by doing a var_dump() on the $hooks array that's passed in, or just check the plugin's source code to see the default structure. This example will use the 404_group key.
 
-`<?php
-add_filter( 'sb_easy_hooks_array', 'prefix_add_custom_hooks' );
-function prefix_add_custom_hooks( $hooks ) {
-	$hooks['404_group']['hooks'][] = 'new_hook';
-	return $hooks;
-}
-?>
-`
+	<?php
+	add_filter( 'sb_easy_hooks_array', 'prefix_add_custom_hooks' );
+	function prefix_add_custom_hooks( $hooks ) {
+		$hooks['404_group']['hooks'][] = 'new_hook';
+		return $hooks;
+	}
+	?>
 
 ## Frequently Asked Questions ##
 
