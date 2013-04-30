@@ -15,6 +15,8 @@ Easily insert most kinds of content or markup into the various hooks available i
 
 For more information on the StartBox hooks, visit [StartBox Hooks](http://docs.wpstartbox.com/Hooks)
 
+All official development on this plugin is on GitHub. Version bumps will still be published here on WordPress.org. You can find the repo at [https://github.com/WebDevStudios/StartBox-Easy-Hooks](https://github.com/WebDevStudios/StartBox-Easy-Hooks). Please file issues, bugs, and enhancement ideas there, when possible.
+
 == Installation ==
 
 Automatic
