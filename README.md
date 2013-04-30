@@ -63,11 +63,13 @@ None...yet.
 
 ## Changelog ##
 
+1.1 Better logic handling for admin notice display.
+
 1.0 Initial commit.
 
 ## Upgrade Notice ##
 
-None...yet.
+1.1 Adds better handling for admin notices when using plugin
 
 ## Screenshots ##
 
